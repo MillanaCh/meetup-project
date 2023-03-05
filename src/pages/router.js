@@ -1,20 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
 import AllMeetupsPage from "./AllMeetups";
 import Favorites from "./Favorites";
 import NewMeetup from "./NewMeetup";
 
-const router = createBrowserRouter([
+const router = [
   {
     path: "/",
     element: <AllMeetupsPage />,
+    id: 0,
   },
   {
     path: "/new-meetup",
     element: <NewMeetup />,
+    id: 1,
   },
   {
     path: "/favorites",
-    element: <Favorites/>
+    element: <Favorites />,
+    id: 2,
   },
-]);
-export default router
+];
+
+export default router;
