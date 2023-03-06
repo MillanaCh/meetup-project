@@ -1,18 +1,16 @@
-/* eslint-disable array-callback-return */
 import { Route, Routes } from "react-router-dom";
-import MainNavigation from "./components/layout/MainNavigation";
 import router from "./pages/router";
+import Layout from "./components/layout/Layout";
 
 function App() {
   return (
-    <div>
-      <MainNavigation />
+    <Layout>
       <Routes>
         {router.map(({ path, element, id }) => (
           <Route path={path} element={element} key={id} />
         ))}
       </Routes>
-    </div>
+    </Layout>
   );
 }
 
