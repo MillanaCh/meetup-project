@@ -1,5 +1,5 @@
 //repsonsible for loading and displating all meetups we have
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MeetupList from "../components/meetups/MeetupList";
 
 // const DUMMY_DATA = [
@@ -27,14 +27,32 @@ function AllMeetupsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataMeetups, setDataMeetups] = useState([]);
   //we want to send request whenever this component is being rendered
-  fetch("https://meetup-196d6-default-rtdb.firebaseio.com/meetups.json")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setIsLoading(false);
-      setDataMeetups(data);
-    });
+
+  useEffect(() => {
+    fetch("https://meetup-196d6-default-rtdb.firebaseio.com/meetups.json")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const meetups = [];
+
+        for (const key in data) {
+          const meetup = {
+            id: key,
+            ...data[key],
+            /*
+            id:key,
+            other data 
+            */
+          };
+          meetups.push(meetup);
+        }
+
+        setIsLoading(false);
+        setDataMeetups(meetups);
+      });
+  }, []);
+
   return isLoading ? (
     <h1>Loading...</h1>
   ) : (
